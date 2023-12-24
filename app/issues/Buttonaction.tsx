@@ -6,7 +6,7 @@ function Buttonaction() {
   return (
     <div className="mb-6">
       <Button>
-        <Link href="/issues/new">New issue</Link>
+        <Link  href="/issues/new">New issue</Link>
       </Button>
     </div>
   );

@@ -25,7 +25,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Theme appearance="light" accentColor="iris">
+        <Theme accentColor="iris">
           <Navbar />
           <main className="p-7">{children}</main>
         </Theme>
