@@ -6,7 +6,7 @@ import Navbar from "./NavBar";
 import { Roboto } from "next/font/google";
 
 const roboto = Roboto({
-  weight: ["400", "700"],
+  weight: ["700"],
   style: ["normal", "italic"],
   subsets: ["latin"],
   display: "swap",
@@ -27,7 +27,7 @@ export default function RootLayout({
       <body className={roboto.className}>
         <Theme>
           <Navbar />
-          <main>{children}</main>
+          <main className="p-7">{children}</main>
         </Theme>
       </body>
     </html>
