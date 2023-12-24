@@ -1,5 +1,0 @@
-{
-  "/issues/new/page": "app/issues/new/page.js",
-  "/issues/page": "app/issues/page.js",
-  "/api/issues/route": "app/api/issues/route.js"
-}
