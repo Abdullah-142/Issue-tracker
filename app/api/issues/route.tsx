@@ -3,8 +3,6 @@ import prisma from "@/prisma/client";
 import dbconnect from "@/app/helpers/dbconnect";
 import { createissueschema } from "@/app/validationschema";
 
-
-
 export async function POST(resquest: NextRequest) {
   const body = await resquest.json();
   const validation = createissueschema.safeParse(body);
@@ -18,7 +16,6 @@ export async function POST(resquest: NextRequest) {
     data: {
       title: body.title,
       description: body.description,
-      status: "CLOSE",
     },
   });
   return NextResponse.json(newuser, { status: 201 });
