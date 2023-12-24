@@ -4,7 +4,6 @@ import React from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
-import { list } from "postcss";
 
 function Navbar() {
   const pathname = usePathname();
