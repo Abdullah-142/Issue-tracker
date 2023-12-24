@@ -18,6 +18,7 @@ export async function POST(resquest: NextRequest) {
     data: {
       title: body.title,
       description: body.description,
+      status: "CLOSE",
     },
   });
   return NextResponse.json(newuser, { status: 201 });
