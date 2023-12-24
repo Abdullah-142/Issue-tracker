@@ -13,11 +13,11 @@ function Navbar() {
     { name: "Issues", path: "/issues" },
   ];
   return (
-    <nav className="flex gap-8 items-center h-14 border border-zinc-900 p-4">
+    <nav className="flex gap-8 items-center h-14  p-8 ">
       <Link href="/">
         <Bug size={32} />
       </Link>
-      <ul className="flex gap-4 text-xl">
+      <ul className="flex gap-8 text-xl">
         {lists.map((list) => (
           <Link
             key={list.path}
