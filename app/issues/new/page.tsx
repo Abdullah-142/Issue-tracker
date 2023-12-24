@@ -2,7 +2,7 @@
 import { Button, Callout, Text, TextField } from "@radix-ui/themes";
 import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
-import { useForm, Controller, FormState } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
@@ -24,6 +24,30 @@ function NewIssuePage() {
   } = useForm<Issueform>({
     resolver: zodResolver(createissueschema),
   });
+
+  const onSubmit = async (data:Issueform) => {
+    try {
+      setLoading(true);
+      const response = await fetch("/api/issues", {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        setError("An unexpected error occured");
+        setLoading(false);
+        return;
+      }
+      router.push("/issues");
+    } catch (error) {
+      setLoading(false);
+      setError("An unexpected error occured");
+    }
+  };
+
+  
   return (
     <div className="max-w-xl space-y-5">
       {error && (
@@ -31,30 +55,7 @@ function NewIssuePage() {
           <Callout.Text>{error}</Callout.Text>
         </Callout.Root>
       )}
-      <form
-        className="space-y-5"
-        onSubmit={handleSubmit(async (data) => {
-          try {
-            setLoading(true);
-            const response = await fetch("/api/issues", {
-              method: "POST",
-              body: JSON.stringify(data),
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-            if (!response.ok) {
-              setError("An unexpected error occured");
-              setLoading(false);
-              return;
-            }
-            router.push("/issues");
-          } catch (error) {
-            setLoading(false);
-            setError("An unexpected error occured");
-          }
-        })}
-      >
+      <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
           <TextField.Input placeholder="Input" {...register("title")} />
         </TextField.Root>
