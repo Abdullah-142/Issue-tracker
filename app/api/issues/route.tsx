@@ -1,12 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
-import { z } from "zod";
 import dbconnect from "@/app/helpers/dbconnect";
-//validation schema
-const createissueschema = z.object({
-  title: z.string().min(3).max(100),
-  description: z.string().min(3).max(1000),
-});
+import { createissueschema } from "@/app/validationschema";
+
+
 
 export async function POST(resquest: NextRequest) {
   const body = await resquest.json();
@@ -23,5 +20,5 @@ export async function POST(resquest: NextRequest) {
       description: body.description,
     },
   });
-  return NextResponse.json(newuser, {status: 201 });
+  return NextResponse.json(newuser, { status: 201 });
 }
