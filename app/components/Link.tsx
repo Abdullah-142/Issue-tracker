@@ -5,7 +5,7 @@ type Props = {
   href: string;
   children: string;
 };
-export function Link({ href, children }: Props) {
+export default function Link({ href, children }: Props) {
   return (
     <NextLink href={href} passHref legacyBehavior>
       <RadixLink>{children}</RadixLink>

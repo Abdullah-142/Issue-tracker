@@ -1,6 +1,5 @@
 "use client";
-import ErrorMessage from "@/app/components/ErrorMessage";
-import Spinner from "@/app/components/Spinner";
+import { Error, Spinner } from "@/app/components";
 import { createissueschema } from "@/app/validationschema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button, Callout, TextField } from "@radix-ui/themes";
@@ -28,7 +27,7 @@ function NewIssuePage() {
     resolver: zodResolver(createissueschema),
   });
 
-  const onSubmit = async (data:Issueform) => {
+  const onSubmit = async (data: Issueform) => {
     try {
       setLoading(true);
       const response = await fetch("/api/issues", {
@@ -50,7 +49,6 @@ function NewIssuePage() {
     }
   };
 
-  
   return (
     <div className="max-w-xl space-y-5">
       {error && (
@@ -62,7 +60,7 @@ function NewIssuePage() {
         <TextField.Root>
           <TextField.Input placeholder="Input" {...register("title")} />
         </TextField.Root>
-        <ErrorMessage>{errors.title?.message}</ErrorMessage>
+        <Error>{errors.title?.message}</Error>
         <Controller
           control={control}
           name="description"
@@ -74,7 +72,7 @@ function NewIssuePage() {
             />
           )}
         />
-        <ErrorMessage>{errors.description?.message}</ErrorMessage>
+        <Error>{errors.description?.message}</Error>
         <Button disabled={loading} className="">
           Submit Issue
           {loading && <Spinner />}

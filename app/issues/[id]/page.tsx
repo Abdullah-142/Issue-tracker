@@ -1,4 +1,4 @@
-import IssueBadge from "@/app/components/IssueBadge";
+import { Issuebadge } from "@/app/components";
 import prisma from "@/prisma/client";
 import { Card, Flex, Text } from "@radix-ui/themes";
 import { notFound } from "next/navigation";
@@ -15,7 +15,7 @@ export default async function Detailissuepage({ params: { id } }: Props) {
         {issue.title}
       </Text>
       <Flex gap={"3"}>
-        <IssueBadge status={issue.status} />
+        <Issuebadge status={issue.status} />
         <p>{issue.createdAt.toDateString()}</p>
       </Flex>
       <Card variant="surface" className="prose" my={"5"}>
