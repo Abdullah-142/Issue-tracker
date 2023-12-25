@@ -31,13 +31,16 @@ function FormData({ issue }: { issue?: Issue }) {
   const onSubmit = async (data: IssueData) => {
     try {
       setLoading(true);
-      const response = await fetch("/api/issues", {
-        method: "POST",
+      const endpoint = issue ? `/api/issues/${issue.id}` : "/api/issues"; // Include id in the URL for PATCH
+      const method = issue ? "PATCH" : "POST"; // Determine the method based on whether there is data in issue
+      const response = await fetch(endpoint, {
+        method: method,
         body: JSON.stringify(data),
         headers: {
           "Content-Type": "application/json",
         },
       });
+      console.log(response);
       if (!response.ok) {
         setError("An unexpected error occured");
         setLoading(false);
@@ -59,7 +62,11 @@ function FormData({ issue }: { issue?: Issue }) {
       )}
       <form className="space-y-5" onSubmit={handleSubmit(onSubmit)}>
         <TextField.Root>
-          <TextField.Input defaultValue={issue?.title} placeholder="Input" {...register("title")} />
+          <TextField.Input
+            defaultValue={issue?.title}
+            placeholder="Input"
+            {...register("title")}
+          />
         </TextField.Root>
         <Error>{errors.title?.message}</Error>
         <Controller
@@ -76,7 +83,7 @@ function FormData({ issue }: { issue?: Issue }) {
         />
         <Error>{errors.description?.message}</Error>
         <Button disabled={loading} className="">
-          Submit Issue
+          {issue ? "Update Issue" : "Create Issue"}
           {loading && <Spinner />}
         </Button>
       </form>
