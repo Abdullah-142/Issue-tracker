@@ -46,4 +46,6 @@ async function IssuePage() {
   );
 }
 
+export const dynamic = "force-dynamic";
+
 export default IssuePage;

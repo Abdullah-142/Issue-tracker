@@ -40,13 +40,13 @@ function FormData({ issue }: { issue?: Issue }) {
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
       if (!response.ok) {
         setError("An unexpected error occured");
         setLoading(false);
         return;
       }
       router.push("/issues");
+      router.refresh();
     } catch (error) {
       setLoading(false);
       setError("An unexpected error occured");
