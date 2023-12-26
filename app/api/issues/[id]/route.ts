@@ -1,4 +1,4 @@
-import { NextRequest,NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 import dbconnect from "@/app/helpers/dbconnect";
 import { issueschema } from "@/app/validationschema";

@@ -14,4 +14,3 @@ function Buttonaction() {
 
 export default Buttonaction;
 
-// want to add skelition loading
