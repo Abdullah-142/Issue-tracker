@@ -12,7 +12,7 @@ function Navbar() {
     { name: "Issues", path: "/issues" },
   ];
   return (
-    <nav className="flex gap-8 items-center h-14  p-8 ">
+    <nav className="flex gap-8  items-center h-14  py-10 ">
       <Link href="/">
         <Bug size={32} />
       </Link>
