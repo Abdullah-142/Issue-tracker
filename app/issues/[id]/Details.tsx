@@ -14,7 +14,7 @@ export default function Details({ issue }: { issue: Issue }) {
         <Issuebadge status={issue.status} />
         <p>{issue.createdAt.toDateString()}</p>
       </Flex>
-      <Card className="prose " mt={"4"}>
+      <Card className="prose" mt={"4"}>
         <ReactMarkdown>{issue.description}</ReactMarkdown>
       </Card>
     </>

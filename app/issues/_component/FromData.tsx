@@ -64,7 +64,7 @@ function FormData({ issue }: { issue?: Issue }) {
         <TextField.Root>
           <TextField.Input
             defaultValue={issue?.title}
-            placeholder="Input"
+            placeholder="Title"
             {...register("title")}
           />
         </TextField.Root>
@@ -82,7 +82,7 @@ function FormData({ issue }: { issue?: Issue }) {
           )}
         />
         <Error>{errors.description?.message}</Error>
-        <Button disabled={loading} className="">
+        <Button disabled={loading}>
           {issue ? "Update Issue" : "Create Issue"}
           {loading && <Spinner />}
         </Button>
