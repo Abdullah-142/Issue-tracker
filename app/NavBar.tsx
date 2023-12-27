@@ -4,8 +4,10 @@ import React from "react";
 import Link from "next/link";
 import classNames from "classnames";
 import { usePathname } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 function Navbar() {
+  const { status, data: session } = useSession();
   const pathname = usePathname();
   const lists = [
     { name: "Dashboard", path: "/" },
@@ -30,6 +32,14 @@ function Navbar() {
             {list.name}
           </Link>
         ))}
+        <div>
+          {status === "unauthenticated" && (
+            <Link href="/api/auth/signin">Sign in</Link>
+          )}
+          {status === "authenticated" && (
+            <Link href="/api/auth/signout">Signout</Link>
+          )}
+        </div>
       </ul>
     </nav>
   );

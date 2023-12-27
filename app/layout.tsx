@@ -4,6 +4,7 @@ import "@radix-ui/themes/styles.css";
 import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import Navbar from "./NavBar";
 import { Roboto } from "next/font/google";
+import SessionProvider from "@/app/auth/SessionProvider";
 
 const roboto = Roboto({
   weight: ["700"],
@@ -25,14 +26,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <Theme accentColor="iris">
-          <Container>
-            <Navbar />
-          </Container>
-          <main className="p-5">
-            <Container>{children}</Container>
-          </main>
-        </Theme>
+        <SessionProvider>
+          <Theme accentColor="iris">
+            <Container>
+              <Navbar />
+            </Container>
+            <main className="p-5">
+              <Container>{children}</Container>
+            </main>
+          </Theme>
+        </SessionProvider>
       </body>
     </html>
   );
