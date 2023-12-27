@@ -38,7 +38,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
         <AlertDialog.Content style={{ maxWidth: 450 }}>
           <AlertDialog.Title>Revoke access</AlertDialog.Title>
           <AlertDialog.Description size="2">
-            Are you sure ? This Action cannt be undo.
+            Are you sure ? This Action cannot be undo.
           </AlertDialog.Description>
           <Flex gap="3" mt="4" justify="end">
             <AlertDialog.Cancel>
