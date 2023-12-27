@@ -28,9 +28,9 @@ export default function RootLayout({
       <body className={roboto.className}>
         <SessionProvider>
           <Theme accentColor="iris">
-            <Container>
+            <main className="border border-zinc-400">
               <Navbar />
-            </Container>
+            </main>
             <main className="p-5">
               <Container>{children}</Container>
             </main>

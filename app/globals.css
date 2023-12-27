@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+@layer utilities {
+  .nav-link{
+    @apply text-gray-500 hover:text-zinc-800 transition-colors;
+  }
+}

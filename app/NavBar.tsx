@@ -1,48 +1,87 @@
 "use client";
-import { Bug } from "lucide-react";
-import React from "react";
-import Link from "next/link";
+import { Avatar, Box, DropdownMenu, Text } from "@radix-ui/themes";
 import classNames from "classnames";
-import { usePathname } from "next/navigation";
+import { Bug } from "lucide-react";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Skeleton } from "@/app/components";
+import { list } from "postcss";
 
 function Navbar() {
-  const { status, data: session } = useSession();
+  return (
+    <nav className="flex justify-between  mx-5 items-center py-5 ">
+      <div className="flex gap-10 items-center">
+        <Box>
+          <Link href="/">
+            <Bug size={32} />
+          </Link>
+        </Box>
+        <NavLink />
+      </div>
+      <div>
+        <Status />
+      </div>
+    </nav>
+  );
+}
+
+const NavLink = () => {
   const pathname = usePathname();
   const lists = [
     { name: "Dashboard", path: "/" },
     { name: "Issues", path: "/issues" },
   ];
   return (
-    <nav className="flex gap-8  items-center h-14  py-10 ">
-      <Link href="/">
-        <Bug size={32} />
-      </Link>
-      <ul className="flex gap-8 text-xl">
-        {lists.map((list) => (
-          <Link
-            key={list.path}
-            className={classNames({
-              "text-zinc-900": pathname === list.path,
-              "text-zinc-500": pathname !== list.path,
-              "hover-text-zinc-800 transition-colors": true,
-            })}
-            href={list.path}
-          >
-            {list.name}
-          </Link>
-        ))}
-        <div>
-          {status === "unauthenticated" && (
-            <Link href="/api/auth/signin">Sign in</Link>
-          )}
-          {status === "authenticated" && (
-            <Link href="/api/auth/signout">Signout</Link>
-          )}
-        </div>
-      </ul>
-    </nav>
+    <ul className="flex gap-8 justify-between items-center text-xl font-normal">
+      {lists.map((list) => (
+        <Link
+          key={list.path}
+          className={classNames({
+            "nav-link": true,
+            "!text-zinc-900": pathname === list.path,
+          })}
+          href={list.path}
+        >
+          {list.name}
+        </Link>
+      ))}
+    </ul>
   );
-}
+};
+
+const Status = () => {
+  const { status, data: session } = useSession();
+  if (status === "loading") return <Skeleton width={"3rem"} />;
+  if (status === "unauthenticated")
+    return <Link className='text-xl nav-link' href="/api/auth/signin">Sign in</Link>;
+  return (
+    <Box className="text-2xl font-normal">
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            className="cursor-pointer"
+            src={session!.user!.image!}
+            fallback="?"
+            size="3"
+            radius="full"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size="2" weight="bold">
+              {session!.user!.email}
+            </Text>
+          </DropdownMenu.Label>
+          <DropdownMenu.Item>
+            <Link className="mx-auto text-[15px]" href="/api/auth/signout">
+              Signout
+            </Link>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
+    </Box>
+  );
+};
 
 export default Navbar;
