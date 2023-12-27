@@ -1,16 +1,15 @@
 "use client";
+import { Skeleton } from "@/app/components";
 import { Avatar, Box, DropdownMenu, Text } from "@radix-ui/themes";
 import classNames from "classnames";
 import { Bug } from "lucide-react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Skeleton } from "@/app/components";
-import { list } from "postcss";
 
-function Navbar() {
+export default function Navbar() {
   return (
-    <nav className="flex justify-between  mx-5 items-center py-5 ">
+    <nav className="flex justify-between p-0  mx-5 items-center py-4 ">
       <div className="flex gap-10 items-center">
         <Box>
           <Link href="/">
@@ -68,14 +67,17 @@ const Status = () => {
           />
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
-          <DropdownMenu.Label>
-            <Text size="2" weight="bold">
+          <DropdownMenu.Label className="flex-col mb-4">
+            <Text size="2" weight={"bold"}>
               {session!.user!.email}
             </Text>
+             <Text className="self-start" weight={"bold"} size={'2'}>
+              {session!.user!.name}
+             </Text>
           </DropdownMenu.Label>
           <DropdownMenu.Item>
             <Link className="mx-auto text-[15px]" href="/api/auth/signout">
-              Signout
+              Sign out
             </Link>
           </DropdownMenu.Item>
         </DropdownMenu.Content>
@@ -84,4 +86,3 @@ const Status = () => {
   );
 };
 
-export default Navbar;

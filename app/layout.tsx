@@ -28,10 +28,11 @@ export default function RootLayout({
       <body className={roboto.className}>
         <SessionProvider>
           <Theme accentColor="iris">
-            <main className="border border-zinc-400">
+            <div className="shadow-lg">
               <Navbar />
-            </main>
-            <main className="p-5">
+            </div>
+
+            <main className="py-7">
               <Container>{children}</Container>
             </main>
           </Theme>
