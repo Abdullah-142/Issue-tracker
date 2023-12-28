@@ -53,7 +53,11 @@ const Status = () => {
   const { status, data: session } = useSession();
   if (status === "loading") return <Skeleton width={"3rem"} />;
   if (status === "unauthenticated")
-    return <Link className='text-xl nav-link' href="/api/auth/signin">Sign in</Link>;
+    return (
+      <Link className="text-xl nav-link" href="/api/auth/signin">
+        Sign in
+      </Link>
+    );
   return (
     <Box className="text-2xl font-normal">
       <DropdownMenu.Root>
@@ -64,6 +68,7 @@ const Status = () => {
             fallback="?"
             size="3"
             radius="full"
+            referrerPolicy="no-referrer"
           />
         </DropdownMenu.Trigger>
         <DropdownMenu.Content>
@@ -71,9 +76,9 @@ const Status = () => {
             <Text size="2" weight={"bold"}>
               {session!.user!.email}
             </Text>
-             <Text className="self-start" weight={"bold"} size={'2'}>
+            <Text className="self-start" weight={"bold"} size={"2"}>
               {session!.user!.name}
-             </Text>
+            </Text>
           </DropdownMenu.Label>
           <DropdownMenu.Item>
             <Link className="mx-auto text-[15px]" href="/api/auth/signout">
@@ -85,4 +90,3 @@ const Status = () => {
     </Box>
   );
 };
-
