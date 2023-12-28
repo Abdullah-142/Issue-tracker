@@ -11,7 +11,7 @@ export async function PATCH(
   const session = await getServerSession(AuthOption);
   //check if user is authenticated
   if (!session) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return NextResponse.json("Unauthorized", { status: 401 });
   }
   const body = await resquest.json();
   const validation = issueschema.safeParse(body);
@@ -46,7 +46,7 @@ export async function DELETE(
 ) {
   const session = await getServerSession(AuthOption);
   if (!session) {
-    return new NextResponse("Unauthorized", { status: 401 });
+    return  NextResponse.json("Unauthorized", { status: 401 });
   }
   try {
     await dbconnect();
