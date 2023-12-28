@@ -5,6 +5,7 @@ import { Container, Theme, ThemePanel } from "@radix-ui/themes";
 import Navbar from "./NavBar";
 import { Roboto } from "next/font/google";
 import SessionProvider from "@/app/auth/SessionProvider";
+import QueryClientProvider from "./QueryClientProvider";
 
 const roboto = Roboto({
   weight: ["700"],
@@ -26,17 +27,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <SessionProvider>
-          <Theme accentColor="iris">
-            <div className="shadow-lg">
-              <Navbar />
-            </div>
+        <QueryClientProvider>
+          <SessionProvider>
+            <Theme accentColor="iris">
+              <div className="shadow-lg">
+                <Navbar />
+              </div>
 
-            <main className="py-7">
-              <Container>{children}</Container>
-            </main>
-          </Theme>
-        </SessionProvider>
+              <main className="py-7">
+                <Container>{children}</Container>
+              </main>
+            </Theme>
+          </SessionProvider>
+        </QueryClientProvider>
       </body>
     </html>
   );
