@@ -59,7 +59,7 @@ model User {
   image          String?
   accounts       Account[]
   sessions       Session[]
-  assigndToIssue Issue[]
+  assignedIssue Issue[]
 }
 
 model VerificationToken {

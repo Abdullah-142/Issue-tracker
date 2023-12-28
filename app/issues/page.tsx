@@ -38,7 +38,7 @@ async function IssuePage() {
                   {issue.createdAt.toDateString()}
                 </Table.Cell>
               </Table.Row>
-            ))}
+            )).reverse()}
           </Table.Body>
         </Table.Root>
       )}
