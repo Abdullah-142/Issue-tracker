@@ -1,10 +1,21 @@
 import { Link, Issuebadge } from "@/app/components";
 import Buttonaction from "@/app/issues/Buttonaction";
 import prisma from "@/prisma/client";
+import { Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
-
-async function IssuePage() {
-  const issues = await prisma.issue.findMany({});
+interface Props {
+  searchParams: { status: Status };
+}
+async function IssuePage({ searchParams }: Props) {
+  const statuss = Object.values(Status);
+  const status = statuss.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
 
   return (
     <div>
@@ -23,22 +34,24 @@ async function IssuePage() {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {issues.map((issue) => (
-              <Table.Row key={issue.id}>
-                <Table.Cell>
-                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-                  <div className="block md:hidden">
+            {issues
+              .map((issue) => (
+                <Table.Row key={issue.id}>
+                  <Table.Cell>
+                    <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                    <div className="block md:hidden">
+                      <Issuebadge status={issue.status} />
+                    </div>
+                  </Table.Cell>
+                  <Table.Cell className="hidden md:table-cell">
                     <Issuebadge status={issue.status} />
-                  </div>
-                </Table.Cell>
-                <Table.Cell className="hidden md:table-cell">
-                  <Issuebadge status={issue.status} />
-                </Table.Cell>
-                <Table.Cell className="hidden md:table-cell">
-                  {issue.createdAt.toDateString()}
-                </Table.Cell>
-              </Table.Row>
-            )).reverse()}
+                  </Table.Cell>
+                  <Table.Cell className="hidden md:table-cell">
+                    {issue.createdAt.toDateString()}
+                  </Table.Cell>
+                </Table.Row>
+              ))
+              .reverse()}
           </Table.Body>
         </Table.Root>
       )}
