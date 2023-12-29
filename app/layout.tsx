@@ -34,7 +34,7 @@ export default function RootLayout({
                 <Navbar />
               </div>
 
-              <main className="py-7">
+              <main className="p-7">
                 <Container>{children}</Container>
               </main>
             </Theme>

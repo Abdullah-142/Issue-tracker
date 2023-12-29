@@ -28,7 +28,7 @@ export default async function Detailissuepage({ params: { id } }: Props) {
       <Box>
         {session && (
           <Flex direction={"column"} gap={"3"}>
-            <Assignissue />
+            <Assignissue issue={issue} />
             <Button issueid={issue.id} />
             <Deleteissue issueid={issue.id} />
           </Flex>

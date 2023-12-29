@@ -10,7 +10,7 @@ export const Patchissueschema = z.object({
   description: z.string().min(3, "This field is required").max(1000).optional(),
   assignToUserId: z
     .string()
-    .min(3, "Assigned to user id  is required")
+    .min(1, "Assigned to user id  is required")
     .max(100)
     .optional()
     .nullable(),
