@@ -3,7 +3,6 @@ import { Skeleton } from "@/app/components";
 import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import axios from "axios";
-import React from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useQuery } from "react-query";
 
