@@ -20,3 +20,5 @@ export default function Details({ issue }: { issue: Issue }) {
     </>
   );
 }
+
+

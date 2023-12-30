@@ -1,5 +1,5 @@
-import { Card, Flex } from "@radix-ui/themes";
 import { Skeleton } from "@/app/components";
+import { Card, Flex } from "@radix-ui/themes";
 
 function issuedetailspage() {
   return (

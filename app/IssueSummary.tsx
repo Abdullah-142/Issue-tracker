@@ -10,17 +10,17 @@ interface Props {
 export default function IssueSummary({ open, closed, inProgress }: Props) {
   const container: { lable: string; value: number; status: Status }[] = [
     {
-      lable: "Open",
+      lable: "Open issue",
       value: open,
       status: "OPEN",
     },
     {
-      lable: "Closed",
+      lable: "Closed issue",
       value: closed,
       status: "CLOSE",
     },
     {
-      lable: "In Progress",
+      lable: "In Progress issue",
       value: inProgress,
       status: "IN_PROGRESS",
     },

@@ -1,12 +1,12 @@
+import { AuthOption } from "@/app/auth/AuthOption";
 import prisma from "@/prisma/client";
 import { Box, Flex, Grid } from "@radix-ui/themes";
-import { notFound } from "next/navigation";
-import Button from "./EditButton";
-import Details from "./Details";
-import Deleteissue from "./Deleteissue";
 import { getServerSession } from "next-auth";
-import { AuthOption } from "@/app/auth/AuthOption";
+import { notFound } from "next/navigation";
 import Assignissue from "./Assignissue";
+import Deleteissue from "./Deleteissue";
+import Details from "./Details";
+import Button from "./EditButton";
 interface Props {
   params: { id: string };
 }
@@ -36,4 +36,12 @@ export default async function Detailissuepage({ params: { id } }: Props) {
       </Box>
     </Grid>
   );
+}
+
+export async function generateMetadata({ params: { id } }: Props) {
+  const issue = await prisma.issue.findUnique({ where: { id: id } });
+  return {
+    title: issue?.title,
+    description: "Details of issue" + issue?.id,
+  };
 }

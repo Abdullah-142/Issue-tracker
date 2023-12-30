@@ -1,8 +1,9 @@
-import { Link, Issuebadge } from "@/app/components";
+import { Issuebadge, Link } from "@/app/components";
 import Buttonaction from "@/app/issues/Buttonaction";
 import prisma from "@/prisma/client";
 import { Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
+import { Metadata } from "next";
 import Pagination from "../components/Pagination";
 interface Props {
   searchParams: { status: Status; page: string };
@@ -28,7 +29,7 @@ async function IssuePage({ searchParams }: Props) {
     <div>
       <Buttonaction />
       {issues.length !== 0 && (
-        <Table.Root variant="surface" my={'4'}>
+        <Table.Root variant="surface" my={"4"}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeaderCell>Issues</Table.ColumnHeaderCell>
@@ -68,7 +69,10 @@ async function IssuePage({ searchParams }: Props) {
     </div>
   );
 }
-
+export const metadata: Metadata = {
+  title: "Issue Tracker - Issues List",
+  description: "View all issues",
+};
 export const dynamic = "force-dynamic";
 
 export default IssuePage;
