@@ -27,13 +27,7 @@ export default async function LastestIssue() {
                     <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
                     <IssueBadge status={issue.status} />
                   </Flex>
-                  {issue.assignToUser && (
-                    <Avatar
-                      src={issue.assignToUser.image}
-                      fallback="?"
-                      radius="full"
-                    />
-                  )}
+                  
                 </Flex>
               </Table.Cell>
             </Table.Row>
