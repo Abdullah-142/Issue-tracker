@@ -3,25 +3,32 @@ import Buttonaction from "@/app/issues/Buttonaction";
 import prisma from "@/prisma/client";
 import { Status } from "@prisma/client";
 import { Table } from "@radix-ui/themes";
+import Pagination from "../components/Pagination";
 interface Props {
-  searchParams: { status: Status };
+  searchParams: { status: Status; page: string };
 }
 async function IssuePage({ searchParams }: Props) {
   const statuss = Object.values(Status);
   const status = statuss.includes(searchParams.status)
     ? searchParams.status
     : undefined;
+  const where = { status };
+
+  const page = parseInt(searchParams.page) || 1;
+  const pageSize = 6;
   const issues = await prisma.issue.findMany({
-    where: {
-      status,
-    },
+    where,
+    skip: (page - 1) * pageSize,
+    take: pageSize,
   });
+
+  const issueCount = await prisma.issue.count({ where });
 
   return (
     <div>
       <Buttonaction />
       {issues.length !== 0 && (
-        <Table.Root variant="surface">
+        <Table.Root variant="surface" my={'4'}>
           <Table.Header>
             <Table.Row>
               <Table.ColumnHeaderCell>Issues</Table.ColumnHeaderCell>
@@ -34,27 +41,30 @@ async function IssuePage({ searchParams }: Props) {
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {issues
-              .map((issue) => (
-                <Table.Row key={issue.id}>
-                  <Table.Cell>
-                    <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
-                    <div className="block md:hidden">
-                      <Issuebadge status={issue.status} />
-                    </div>
-                  </Table.Cell>
-                  <Table.Cell className="hidden md:table-cell">
+            {issues.map((issue) => (
+              <Table.Row key={issue.id}>
+                <Table.Cell>
+                  <Link href={`/issues/${issue.id}`}>{issue.title}</Link>
+                  <div className="block md:hidden">
                     <Issuebadge status={issue.status} />
-                  </Table.Cell>
-                  <Table.Cell className="hidden md:table-cell">
-                    {issue.createdAt.toDateString()}
-                  </Table.Cell>
-                </Table.Row>
-              ))
-              .reverse()}
+                  </div>
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  <Issuebadge status={issue.status} />
+                </Table.Cell>
+                <Table.Cell className="hidden md:table-cell">
+                  {issue.createdAt.toDateString()}
+                </Table.Cell>
+              </Table.Row>
+            ))}
           </Table.Body>
         </Table.Root>
       )}
+      <Pagination
+        currentPage={page}
+        pageSize={pageSize}
+        itemCount={issueCount}
+      />
     </div>
   );
 }
