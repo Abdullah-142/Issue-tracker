@@ -7,25 +7,23 @@ import Assignissue from "./Assignissue";
 import Deleteissue from "./Deleteissue";
 import Details from "./Details";
 import Button from "./EditButton";
+import { cache } from "react";
 interface Props {
   params: { id: string };
 }
+const fetchdata = cache((id: string) =>
+  prisma.issue.findUnique({ where: { id: id } })
+);
 export default async function Detailissuepage({ params: { id } }: Props) {
   const session = await getServerSession(AuthOption);
-  const issue = await prisma.issue.findUnique({ where: { id: id } });
+  const issue = await fetchdata(id);
   if (!issue) notFound();
   return (
-    <Grid
-      gap={"5"}
-      columns={{
-        initial: " 1",
-        sm: "5",
-      }}
-    >
-      <Box className="md:col-span-4">
+    <div className="grid grid-cols-1 gap-5 lg:grid-cols-5 items-center">
+      <Box className="lg:col-span-4 ">
         <Details issue={issue} />
       </Box>
-      <Box>
+      <Box className="lg:col-span-1 ">
         {session && (
           <Flex direction={"column"} gap={"3"}>
             <Assignissue issue={issue} />
@@ -34,12 +32,12 @@ export default async function Detailissuepage({ params: { id } }: Props) {
           </Flex>
         )}
       </Box>
-    </Grid>
+    </div>
   );
 }
 
 export async function generateMetadata({ params: { id } }: Props) {
-  const issue = await prisma.issue.findUnique({ where: { id: id } });
+  const issue = await fetchdata(id);
   return {
     title: issue?.title,
     description: "Details of issue" + issue?.id,
