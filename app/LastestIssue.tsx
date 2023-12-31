@@ -36,5 +36,3 @@ export default async function LastestIssue() {
     </Card>
   );
 }
-
-export const dynamic = "force-dynamic";
