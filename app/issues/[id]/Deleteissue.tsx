@@ -30,7 +30,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger className="hover:cursor-pointer">
-          <Button color="red" disabled={loading}>
+          <Button color="crimson" disabled={loading}>
             {loading && <Spinner />}
             Delete Issue
           </Button>
@@ -47,7 +47,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="red" onClick={deleteissue}>
+              <Button variant="solid" color="amber" onClick={deleteissue}>
                 Continue
               </Button>
             </AlertDialog.Action>
@@ -63,7 +63,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
           <Button
             variant="solid"
             mt={"3"}
-            color="red"
+            color="blue"
             onClick={() => seterror(false)}
           >
             Continue
