@@ -1,5 +1,6 @@
 "use client";
 import { Spinner } from "@/app/components";
+
 import { AlertDialog, Button, Flex } from "@radix-ui/themes";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -30,7 +31,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger className="hover:cursor-pointer">
-          <Button color="blue" disabled={loading}>
+          <Button className="bg-red-500" disabled={loading}>
             {loading && <Spinner />}
             Delete Issue
           </Button>
@@ -47,7 +48,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="blue" onClick={deleteissue}>
+              <Button variant="solid" className="bg-red-500" onClick={deleteissue}>
                 Continue
               </Button>
             </AlertDialog.Action>
