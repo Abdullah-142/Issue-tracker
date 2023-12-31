@@ -30,7 +30,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
     <>
       <AlertDialog.Root>
         <AlertDialog.Trigger className="hover:cursor-pointer">
-          <Button color="crimson" disabled={loading}>
+          <Button color="blue" disabled={loading}>
             {loading && <Spinner />}
             Delete Issue
           </Button>
