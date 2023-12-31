@@ -47,7 +47,7 @@ function Deleteissue({ issueid }: { issueid: string }) {
               </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action>
-              <Button variant="solid" color="amber" onClick={deleteissue}>
+              <Button variant="solid" color="blue" onClick={deleteissue}>
                 Continue
               </Button>
             </AlertDialog.Action>
